@@ -2,11 +2,11 @@
 
 ## Reference Image
 
-[image](./Project%20target%20image.png)
+![image](./Project%20target%20image.png)
 
 ## Final Scene
 
-[image](./Screenshot%202024-12-18%20212013.png)
+![image](./Screenshot%202024-12-18%20212013.png)
 
 ## Reflection
 
