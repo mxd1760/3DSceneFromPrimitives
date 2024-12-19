@@ -1,0 +1,6 @@
+﻿  SceneManager.cpp
+B:\Planning and stuff\Projects\SNHU Degree\Term 9 (2024 oct-dec)\CS330 (Graphics)\CS330Content29June\CS330Content\Projects\7-1_FinalProjectMilestones\Source\SceneManager.cpp(223,16): warning C4018: '<': signed/unsigned mismatch
+B:\Planning and stuff\Projects\SNHU Degree\Term 9 (2024 oct-dec)\CS330 (Graphics)\CS330Content29June\CS330Content\Projects\7-1_FinalProjectMilestones\Source\SceneManager.cpp(638,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+B:\Planning and stuff\Projects\SNHU Degree\Term 9 (2024 oct-dec)\CS330 (Graphics)\CS330Content29June\CS330Content\Projects\7-1_FinalProjectMilestones\Source\SceneManager.cpp(654,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+B:\Planning and stuff\Projects\SNHU Degree\Term 9 (2024 oct-dec)\CS330 (Graphics)\CS330Content29June\CS330Content\Projects\7-1_FinalProjectMilestones\Source\SceneManager.cpp(655,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  7-1_FinalProjectMilestones.vcxproj -> B:\Planning and stuff\Projects\SNHU Degree\Term 9 (2024 oct-dec)\CS330 (Graphics)\CS330Content29June\CS330Content\Projects\7-1_FinalProjectMilestones\Debug\7-1_FinalProjectMilestones.exe
