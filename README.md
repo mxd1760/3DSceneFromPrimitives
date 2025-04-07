@@ -1,5 +1,5 @@
 # 3D Scene From Primitives 
-(CS330 Final Project)
+Sample app for practice building 3D scenes using OpenGL, mesh primitives, transformations, and rendering tools.
 
 ## Reference Image
 
@@ -9,7 +9,11 @@
 
 ![image](./Screenshot%202024-12-18%20212013.png)
 
-## Reflection
+## Build instructions
+
+ -- TODO -- 
+
+## Reflection (CS330 Coursework)
 
 ### How do I approach designing software?
 
