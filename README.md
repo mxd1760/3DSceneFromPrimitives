@@ -1,4 +1,5 @@
-# CS330 Final Project
+# 3D Scene From Primitives 
+(CS330 Final Project)
 
 ## Reference Image
 
