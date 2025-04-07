@@ -9,10 +9,6 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
 
 ![image](./Screenshot%202024-12-18%20212013.png)
 
-## Build instructions
-
- -- TODO -- 
-
 ## Reflection (CS330 Coursework)
 
 ### How do I approach designing software?
