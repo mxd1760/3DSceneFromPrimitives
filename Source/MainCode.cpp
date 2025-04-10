@@ -11,10 +11,11 @@
 #include <cstdlib>          // EXIT_FAILURE
 
 #include <GL/glew.h>        // GLEW library
-#include "GLFW/glfw3.h"     // GLFW library
+#include <GLFW/glfw3.h>     // GLFW library
 
 // GLM Math Header inclusions
 #include <glm/glm.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 

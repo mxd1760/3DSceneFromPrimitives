@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\3DShapes\ShapeMeshes.cpp">
-      <Filter>Source Files\3D Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Utilities\ShaderManager.cpp">
-      <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MainCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,6 +24,8 @@
     <ClCompile Include="Source\ViewManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="3DShapes\ShapeMeshes.cpp" />
+    <ClCompile Include="Utilities\ShaderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SceneManager.h">
@@ -38,5 +34,15 @@
     <ClInclude Include="Source\ViewManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="3DShapes\ShapeMeshes.h" />
+    <ClInclude Include="Utilities\ShaderManager.h" />
+    <ClInclude Include="Utilities\linmath.h" />
+    <ClInclude Include="Utilities\camera.h" />
+    <ClInclude Include="Utilities\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmentShader.glsl" />
+    <None Include="shaders\vertexShader.glsl" />
+    <None Include="vcpkg.json" />
   </ItemGroup>
 </Project>

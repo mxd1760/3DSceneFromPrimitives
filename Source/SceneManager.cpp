@@ -14,6 +14,7 @@
 #include "stb_image.h"
 #endif
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
 // declaration of global variables

@@ -9,6 +9,33 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
 
 ![image](./Screenshot%202024-12-18%20212013.png)
 
+## Build Instructions
+
+### Visual Studio 
+
+ 0. use the following commands to ensure you have Visual Studio with the correct packages installed.
+
+ ```
+ winget install Microsoft.VisualStudio.2022.BuildTools 
+ ```
+ ```
+ "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe"
+ ```
+ install your preferred workflow but be sure to include the vcpkg package manager.
+
+ 1. clone repository
+
+ 2. open the .sln file in this repo from file explorer or visual studio
+
+ 3. open the developer terminal (Tools>Command Line>Developer Command Prompt) and run the following command to install dependencies
+ 
+ ```
+ vcpkg install --triplet x64-windows
+ ```
+ if you want to build for a different system then you will need to reconfigure the project and pass a different triplet argument
+
+  4. once all of this has been configured you should be able to use the play button in Visual Studio to build and run the program.
+
 ## Reflection (CS330 Coursework)
 
 ### How do I approach designing software?

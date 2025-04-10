@@ -11,6 +11,7 @@
 
 // GLM Math Header inclusions
 #include <glm/glm.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>    
 
