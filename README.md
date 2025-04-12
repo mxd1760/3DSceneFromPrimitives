@@ -13,13 +13,17 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
 
 ### Visual Studio 
 
- 0. use the following commands to ensure you have Visual Studio with the correct packages installed.
+ 0. run the following commands in an **Administrator Command Prompt** to ensure you have Visual Studio with the correct packages installed.
 
  ```
- winget install Microsoft.VisualStudio.2022.BuildTools 
+ winget install Microsoft.VisualStudio.2022.Community
  ```
  ```
- "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe"
+ "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe" modify^
+     --passive^
+     --channelId VisualStudio.17.Release^
+     --productId Microsoft.VisualStudio.Product.Community^
+     --add Microsoft.VisualStudio.Workload.NativeDesktop;includeRecommended
  ```
  install your preferred workflow but be sure to include the **vcpkg package manager**.
 
