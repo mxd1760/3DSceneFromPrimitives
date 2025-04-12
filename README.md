@@ -19,7 +19,11 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
  winget install Microsoft.VisualStudio.2022.BuildTools 
  ```
  ```
- "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe"
+ "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe" modify^
+     --passive^
+     --channelId VisualStudio.17.Release^
+     --productId Microsoft.VisualStudio.Product.BuildTools^
+     --add Microsoft.VisualStudio.Component.Vcpkg
  ```
  install your preferred workflow but be sure to include the **vcpkg package manager**.
 
