@@ -13,7 +13,7 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
 
 ### Visual Studio 
 
- 0. use the following commands to ensure you have Visual Studio with the correct packages installed.
+ 0. run the following commands in an **Administrator Command Prompt** to ensure you have Visual Studio with the correct packages installed.
 
  ```
  winget install Microsoft.VisualStudio.2022.BuildTools 
