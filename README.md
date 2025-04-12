@@ -23,7 +23,7 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
      --passive^
      --channelId VisualStudio.17.Release^
      --productId Microsoft.VisualStudio.Product.Community^
-     --add Microsoft.VisualStudio.Component.Vcpkg
+     --add Microsoft.VisualStudio.Workload.NativeDesktop;includeRecommended
  ```
  install your preferred workflow but be sure to include the **vcpkg package manager**.
 
