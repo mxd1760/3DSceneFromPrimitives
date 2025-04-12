@@ -21,7 +21,7 @@ Sample app for practice building 3D scenes using OpenGL, mesh primitives, transf
  ```
  "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe"
  ```
- install your preferred workflow but be sure to include the vcpkg package manager.
+ install your preferred workflow but be sure to include the **vcpkg package manager**.
 
  1. clone repository
 
