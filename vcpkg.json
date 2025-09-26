@@ -3,7 +3,8 @@
     "glad",
     "glew",
     "glfw3",
-    "glm"
+    "glm",
+    "tinyobjloader"
   ],
   "builtin-baseline":"0bf1354d6704ec797acea686d0250afc4036a082"
 }

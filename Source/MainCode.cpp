@@ -23,6 +23,7 @@
 #include "ViewManager.h"
 #include "ShapeMeshes.h"
 #include "ShaderManager.h"
+#include "tiny_obj_loader.h"
 
 // Namespace for declaring global variables
 namespace
@@ -45,6 +46,9 @@ namespace
 // need to be pre-declared at the beginning of the source code.
 bool InitializeGLFW();
 bool InitializeGLEW();
+void read_file(char* file);
+
+//file
 
 
 /***********************************************************
@@ -55,6 +59,13 @@ bool InitializeGLEW();
  ***********************************************************/
 int main(int argc, char* argv[])
 {
+	if (argc > 1) {
+		read_file(argv[1]);
+		std::cout << "\nHELLO!!!\n" << std::endl;
+	}
+	
+
+
 	// if GLFW fails initialization, then terminate the application
 	if (InitializeGLFW() == false)
 	{
@@ -130,6 +141,28 @@ int main(int argc, char* argv[])
 
 	// Terminates the program successfully
 	exit(EXIT_SUCCESS); 
+}
+
+/***********************************************************
+ *	read_file(char* file)
+ *
+ *  This function is used to read in an obj file
+ ***********************************************************/
+void read_file(char* inputfile) {
+	tinyobj::ObjReaderConfig reader_config;
+	reader_config.mtl_search_path = "./"; // Path to material files
+
+	tinyobj::ObjReader reader;
+
+	if (!reader.ParseFromFile(inputfile, reader_config)) {
+		if (!reader.Error().empty()) {
+			std::cerr << "TinyObjReader: " << reader.Error();
+		}
+		exit(1);
+	}
+
+	auto& shapes = reader.GetShapes();
+	std::cout << "\nNum Shapes: " << shapes.size() << std::endl;
 }
 
 /***********************************************************
