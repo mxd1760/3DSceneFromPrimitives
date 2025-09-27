@@ -8,6 +8,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "SceneManager.h"
+#include "tiny_obj_loader.h"
 
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
@@ -775,8 +776,8 @@ void SceneManager::RenderScene()
 	}
 
 	// leaves
-	for (int i = 0; i < 8; i++) {
-		SetShaderTexture("ground_2");
+	SetShaderTexture("ground_2");
+	for (int i = 0; i < 7; i++) {
 		SetTransformations(
 			glm::vec3(150.0f , 1.0f, 100.0f),
 			-90.0f,
@@ -787,6 +788,17 @@ void SceneManager::RenderScene()
 		m_basicMeshes->DrawPlaneMesh();
 	}
 
+	SetShaderTexture("wood");
+	SetTransformations(
+		glm::vec3(1.0f, 1.0f, 1.0f), 0, 0, 0, glm::vec3(0, 10.0f, 0)
+	);
+	//m_basicMeshes->DrawSphereMeshLines();
+	m_basicMeshes->DrawCustomMesh();
+
+}
+
+void SceneManager::LoadCustomMesh(std::string path,std::string filename) {
+	m_basicMeshes->LoadCustomMesh(path,filename);
 }
 
 

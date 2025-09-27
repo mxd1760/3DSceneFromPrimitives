@@ -14,6 +14,8 @@
 
 #include <glm/glm.hpp>
 
+#include <string>
+
 /***********************************************************
  *  ShapeMeshes
  *
@@ -48,6 +50,7 @@ private:
 	GLMesh m_SphereMesh;
 	GLMesh m_TaperedCylinderMesh;
 	GLMesh m_TorusMesh;
+	GLMesh m_CustomMesh;
 	// the following torus meshes are provided in case multiple tori of different thicknesses are needed
 	GLMesh m_ExtraTorusMesh1;
 	GLMesh m_ExtraTorusMesh2;
@@ -77,6 +80,8 @@ public:
 	void LoadSphereMesh();
 	void LoadTaperedCylinderMesh();
 	void LoadTorusMesh(float thickness = 0.2);
+	
+	void LoadCustomMesh(std::string path, std::string filename);
 	// the following torus meshes are provided in case multiple tori of different thicknesses are needed
 	void LoadExtraTorusMesh1(float thickness = 0.4);
 	void LoadExtraTorusMesh2(float thickness = 0.6);
@@ -102,6 +107,7 @@ public:
 		bool bDrawBottom = true,
 		bool bDrawSides = true);
 	void DrawTorusMesh();
+	void DrawCustomMesh();
 	void DrawHalfTorusMesh();
 
 	// methods for drawing the shape mesh lines in the
@@ -124,6 +130,7 @@ public:
 		bool bDrawBottom = true,
 		bool bDrawSides = true);
 	void DrawTorusMeshLines();
+	void DrawCustomMeshLines();
 	void DrawHalfTorusMeshLines();
 	// the following torus meshes are provided in case multiple tori of different thicknesses are needed
 	void DrawExtraTorusMesh1();

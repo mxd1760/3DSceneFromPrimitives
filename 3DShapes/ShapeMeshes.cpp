@@ -9,6 +9,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "shapemeshes.h"
+#include "tiny_obj_loader.h"
+#include <iostream>
 
 // GLM Math Header inclusions
 #include <glm/glm.hpp>
@@ -1964,6 +1966,106 @@ void ShapeMeshes::LoadTaperedCylinderMesh()
 	}
 }
 
+void ShapeMeshes::LoadCustomMesh(std::string path,std::string filename) {
+
+	tinyobj::ObjReaderConfig reader_config;
+	reader_config.mtl_search_path = path; // Path to material files
+
+	tinyobj::ObjReader reader;
+
+	if (!reader.ParseFromFile(path+filename, reader_config)) {
+		if (!reader.Error().empty()) {
+			std::cerr << "TinyObjReader: " << reader.Error();
+		}
+		exit(1);
+	}
+
+	if (!reader.Warning().empty()) {
+		std::cout << "TinyObjReader: " << reader.Warning();
+	}
+
+	const tinyobj::attrib_t& attrib = reader.GetAttrib();
+	const std::vector<tinyobj::shape_t>& shapes = reader.GetShapes();
+	const std::vector<tinyobj::material_t>& materials = reader.GetMaterials();
+
+	std::vector<GLuint> indices;
+	std::vector<GLfloat> vertices;
+
+	bool has_normals = shapes[0].mesh.indices[0].normal_index >= 0;
+	bool has_texcoords = shapes[0].mesh.indices[0].texcoord_index >= 0;
+
+	for (size_t s = 0; s < shapes.size(); s++) {
+		size_t index_offset = 0;
+		for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++) {
+			size_t fv = shapes[s].mesh.num_face_vertices[f];
+
+			// Vertices (positions are stored flat: x0,y0,z0, x1,y1,z1, ...)
+			//std::cout << "Vertices:\n";
+			for (size_t v = 0; v < 3; v++) {
+				tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+
+				indices.push_back(idx.vertex_index);
+
+				float x = attrib.vertices[3 * size_t(idx.vertex_index) + 0];
+				float y = attrib.vertices[3 * size_t(idx.vertex_index) + 1];
+				float z = attrib.vertices[3 * size_t(idx.vertex_index) + 2];
+				//std::cout << "  v[" << idx.vertex_index << "]: (" << x << ", " << y << ", " << z << ")\n";
+
+				vertices.push_back(x);
+				vertices.push_back(y);
+				vertices.push_back(z);
+
+				// Normals (if present)
+				if (has_normals) {
+					float nx = attrib.normals[3 * size_t(idx.normal_index) + 0];
+					float ny = attrib.normals[3 * size_t(idx.normal_index) + 1];
+					float nz = attrib.normals[3 * size_t(idx.normal_index) + 2];
+					//std::cout << "  n[" << idx.normal_index << "]: (" << nx << ", " << ny << ", " << nz << ")\n";
+
+					vertices.push_back(nx);
+					vertices.push_back(ny);
+					vertices.push_back(nz);
+				}
+
+				// Texcoords (if present)
+				if (has_texcoords) {
+					float u = attrib.texcoords[2 * size_t(idx.texcoord_index) + 0];
+					float v = attrib.texcoords[2 * size_t(idx.texcoord_index) + 1];
+					//std::cout << "  uv[" << idx.texcoord_index << "]: (" << u << ", " << v << ")\n";
+
+					vertices.push_back(u);
+					vertices.push_back(v);
+				}
+
+			}
+			index_offset += fv;
+		}
+	}
+
+	
+
+	
+	m_CustomMesh.nVertices = vertices.size()/(g_FloatsPerVertex+g_FloatsPerNormal*has_normals+g_FloatsPerUV*has_texcoords);
+	std::cout <<"num verts: " <<  m_CustomMesh.nVertices << std::endl;
+	m_CustomMesh.nIndices = indices.size();
+	std::cout << "num idx: " << m_CustomMesh.nIndices << std::endl;
+
+	glGenVertexArrays(1,&m_CustomMesh.vao);
+	glBindVertexArray(m_CustomMesh.vao);
+
+	glGenBuffers(2, m_CustomMesh.vbos);
+	glBindBuffer(GL_ARRAY_BUFFER, m_CustomMesh.vbos[0]); // Activates the vertex buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), vertices.data(), GL_STATIC_DRAW); // Sends vertex or coordinate data to the GPU
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_CustomMesh.vbos[1]); // Activates the index buffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*indices.size(), indices.data(), GL_STATIC_DRAW);
+
+	if (m_bMemoryLayoutDone == false)
+	{
+		SetShaderMemoryLayout();
+	}
+}
+
 ///////////////////////////////////////////////////
 //	LoadTorusMesh()
 //
@@ -2157,6 +2259,8 @@ void ShapeMeshes::LoadTorusMesh(float thickness)
 		SetShaderMemoryLayout();
 	}
 }
+
+
 
 ///////////////////////////////////////////////////
 //	LoadExtraTorusMesh1()
@@ -2984,6 +3088,31 @@ void ShapeMeshes::DrawTorusMeshLines()
 	glBindVertexArray(0);
 }
 
+void ShapeMeshes::DrawCustomMesh()
+{
+	if (m_CustomMesh.nVertices <= 0) {
+		return;
+	}
+	glBindVertexArray(m_CustomMesh.vao);
+	
+	glDrawArrays(GL_TRIANGLES, 0, m_CustomMesh.nVertices);
+	
+
+	glBindVertexArray(0);
+}
+
+void ShapeMeshes::DrawCustomMeshLines()
+{
+	if (m_CustomMesh.nVertices <= 0) {
+		return;
+	}
+	glBindVertexArray(m_CustomMesh.vao);
+
+	glDrawArrays(GL_LINE_STRIP, 0, m_CustomMesh.nVertices);
+
+	glBindVertexArray(0);
+}
+
 ///////////////////////////////////////////////////
 //	DrawExtraTorusMesh1()
 //
@@ -3102,3 +3231,5 @@ void ShapeMeshes::SetShaderMemoryLayout()
 	glVertexAttribPointer(2, g_FloatsPerUV, GL_FLOAT, GL_FALSE, stride, (void*)(sizeof(float) * (g_FloatsPerVertex + g_FloatsPerNormal)));
 	glEnableVertexAttribArray(2);
 }
+
+

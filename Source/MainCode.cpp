@@ -42,13 +42,11 @@ namespace
 	ViewManager* g_ViewManager = nullptr;
 }
 
+
 // Function declarations - all functions that are called manually
 // need to be pre-declared at the beginning of the source code.
 bool InitializeGLFW();
 bool InitializeGLEW();
-void read_file(char* file);
-
-//file
 
 
 /***********************************************************
@@ -59,12 +57,6 @@ void read_file(char* file);
  ***********************************************************/
 int main(int argc, char* argv[])
 {
-	if (argc > 1) {
-		read_file(argv[1]);
-		std::cout << "\nHELLO!!!\n" << std::endl;
-	}
-	
-
 
 	// if GLFW fails initialization, then terminate the application
 	if (InitializeGLFW() == false)
@@ -96,6 +88,13 @@ int main(int argc, char* argv[])
 	// try to create a new scene manager object and prepare the 3D scene
 	g_SceneManager = new SceneManager(g_ShaderManager);
 	g_SceneManager->PrepareScene();
+	if (argc > 1) {
+		std::string path = argv[1];
+		size_t pos = path.find_last_of("/\\")+1;
+		std::string dir = path.substr(0, pos);
+		std::string file = path.substr(pos);
+		g_SceneManager->LoadCustomMesh(dir,file);
+	}
 
 	// loop will keep running until the application is closed 
 	// or until an error has occurred
@@ -143,27 +142,6 @@ int main(int argc, char* argv[])
 	exit(EXIT_SUCCESS); 
 }
 
-/***********************************************************
- *	read_file(char* file)
- *
- *  This function is used to read in an obj file
- ***********************************************************/
-void read_file(char* inputfile) {
-	tinyobj::ObjReaderConfig reader_config;
-	reader_config.mtl_search_path = "./"; // Path to material files
-
-	tinyobj::ObjReader reader;
-
-	if (!reader.ParseFromFile(inputfile, reader_config)) {
-		if (!reader.Error().empty()) {
-			std::cerr << "TinyObjReader: " << reader.Error();
-		}
-		exit(1);
-	}
-
-	auto& shapes = reader.GetShapes();
-	std::cout << "\nNum Shapes: " << shapes.size() << std::endl;
-}
 
 /***********************************************************
  *	InitializeGLFW()

@@ -13,7 +13,7 @@
 #include "ShapeMeshes.h"
 
 #include <string>
-#include <vector>
+#include <vector>ds
 
 /***********************************************************
  *  SceneManager
@@ -112,6 +112,7 @@ public:
 	// The following methods are for the students to 
 	// customize for their own 3D scene
 	void PrepareScene();
+	void LoadCustomMesh(std::string path,std::string filename);
 	void RenderScene();
 
 };
