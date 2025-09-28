@@ -79,19 +79,24 @@ int main(int argc, char* argv[])
 		return(EXIT_FAILURE);
 	}
 
+	std::string path = argv[0];
+	size_t pos = path.find_last_of("/\\")+1;
+	std::string dir = path.substr(0, pos);
+
+
 	// load the shader code from the external GLSL files
 	g_ShaderManager->LoadShaders(
-		"shaders/vertexShader.glsl",
-		"shaders/fragmentShader.glsl");
+		(dir + std::string("shaders/vertexShader.glsl")).c_str(),
+		(dir + std::string("shaders/fragmentShader.glsl")).c_str());
 	g_ShaderManager->use();
 
 	// try to create a new scene manager object and prepare the 3D scene
 	g_SceneManager = new SceneManager(g_ShaderManager);
 	g_SceneManager->PrepareScene();
 	if (argc > 1) {
-		std::string path = argv[1];
-		size_t pos = path.find_last_of("/\\")+1;
-		std::string dir = path.substr(0, pos);
+		path = argv[1];
+		pos = path.find_last_of("/\\")+1;
+		dir = path.substr(0, pos);
 		std::string file = path.substr(pos);
 		g_SceneManager->LoadCustomMesh(dir,file);
 	}

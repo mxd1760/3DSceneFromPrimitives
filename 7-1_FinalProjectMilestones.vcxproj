@@ -123,7 +123,7 @@
       <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /D "$(ProjectDir)vcpkg_installed\x64-windows\debug\bin\*.dll" "$(OutDir)"</Command>
+      <Command>"$(ProjectDir)post-build.bat" "$(ProjectDir)." "$(OutDir)." "debug"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -164,7 +164,7 @@
       <AdditionalDependencies>glad.lib;glew32.lib;glfw3dll.lib;glm.lib;glu32.lib;opengl32.lib;tinyobjloader.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /D "$(ProjectDir)vcpkg_installed\x64-windows\bin\*.dll" "$(OutDir)"</Command>
+      <Command>"$(ProjectDir)post-build.bat" "$(ProjectDir)." "$(OutDir)." "release"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
